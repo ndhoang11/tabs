@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music App</title>
+  </head>
+  <body>
+    <h1>Welcome to our Music App!</h1>
+    <p>Here are some of our featured playlists:</p>
+    <ul>
+      <li>Pop Hits</li>
+      <li>Rap Caviar</li>
+      <li>Rock Classics</li>
+    </ul>
+    <p>Click on a playlist to start listening!</p>
+
+    <script>
+        const playlistItems = document.querySelectorAll('li');
+
+playlistItems.forEach(item => {
+  item.addEventListener('click', () => {
+    // play corresponding song
+  });
+});
+// initialize Spotify Web API client
+const spotifyApi = new SpotifyWebApi();
+
+// search for a track
+spotifyApi.searchTracks('track:All of Me artist:John Legend')
+  .then(data => {
+    console.log('Search results', data.body);
+  }, error => {
+    console.error(error);
+  });
+  // get user's top tracks
+spotifyApi.getMyTopTracks()
+  .then(data => {
+    console.log('Top tracks', data.body);
+    // use top tracks to make personalized recommendations
+  }, error => {
+    console.error(error);
+  });
+    </script>
+  </body>
+</html>
